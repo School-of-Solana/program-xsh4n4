@@ -1,1 +1,91 @@
-Intial Contract version done 
+# Decentralized Voting System - Backend (Verification Portal)
+
+Admin-controlled verification portal for voter authentication and token distribution. This system validates voter identities and issues blockchain-based voting tokens.
+
+## Prerequisites
+
+- **Node.js**: 18.18.0 or higher
+- **Database**: PostgreSQL 14+ or MongoDB 5+
+- **Solana CLI**: For token distribution
+- **Admin Wallet**: Funded Solana wallet with SOL for transactions
+
+## Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Setup environment variables
+cp .env.example .env
+
+# Run database migrations (if using PostgreSQL)
+npm run migrate
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+Server runs on `http://localhost:5000` by default.
+
+## Tech Stack
+
+- **Framework**: Express.js / Next.js API Routes
+- **Language**: TypeScript
+- **Database**: PostgreSQL with Prisma ORM / MongoDB with Mongoose
+- **Authentication**: JWT + Admin credentials
+- **File Storage**: AWS S3 (for KYC documents)
+- **Blockchain**: @solana/web3.js, @coral-xyz/anchor
+- **Email Service**: SendGrid / Nodemailer
+- **Rate Limiting**: express-rate-limit
+- **Security**: helmet, cors, bcrypt
+
+## Project Structure
+
+```
+backend/
+├── src/
+│   ├── config/
+│   │   ├── database.ts           # Database configuration
+│   │   ├── solana.ts             # Solana connection setup
+│   │   └── env.ts                # Environment variables
+│   ├── controllers/
+│   │   ├── verificationController.ts  # Voter verification logic
+│   │   ├── adminController.ts         # Admin operations
+│   │   └── tokenController.ts         # Token distribution
+│   ├── models/
+│   │   ├── Voter.ts              # Voter schema
+│   │   ├── VerificationRequest.ts
+│   │   └── Admin.ts
+│   ├── routes/
+│   │   ├── verification.ts       # Verification endpoints
+│   │   ├── admin.ts              # Admin endpoints
+│   │   └── token.ts              # Token endpoints
+│   ├── services/
+│   │   ├── verificationService.ts # Business logic
+│   │   ├── tokenService.ts        # Token distribution
+│   │   ├── emailService.ts        # Email notifications
+│   │   └── storageService.ts      # File storage
+│   ├── middleware/
+│   │   ├── auth.ts               # JWT authentication
+│   │   ├── adminAuth.ts          # Admin authorization
+│   │   ├── rateLimiter.ts        # Rate limiting
+│   │   └── validator.ts          # Request validation
+│   ├── utils/
+│   │   ├── solana.ts             # Solana utilities
+│   │   ├── crypto.ts             # Encryption helpers
+│   │   └── logger.ts             # Logging utility
+│   └── app.ts                     # Express app setup
+├── tests/
+│   ├── verification.test.ts
+│   └── token.test.ts
+├── .env.example
+├── tsconfig.json
+└── package.json
+```
+
